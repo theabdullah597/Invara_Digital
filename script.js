@@ -398,6 +398,40 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ==========================================
+    // COPY EMAIL TO CLIPBOARD
+    // ==========================================
+    const copyEmailBtn = document.getElementById('copyEmailBtn');
+    if (copyEmailBtn) {
+        copyEmailBtn.addEventListener('click', function () {
+            const email = 'support@invaradigital.co.uk';
+            navigator.clipboard.writeText(email).then(() => {
+                const originalText = this.textContent;
+                this.textContent = 'Email Copied!';
+                this.style.borderColor = '#2ecc71';
+                this.style.color = '#2ecc71';
+
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.borderColor = 'var(--electric-blue)';
+                    this.style.color = 'var(--electric-blue)';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy email: ', err);
+                const originalText = this.textContent;
+                this.textContent = 'Failed to Copy';
+                this.style.borderColor = '#e74c3c';
+                this.style.color = '#e74c3c';
+
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.borderColor = 'var(--electric-blue)';
+                    this.style.color = 'var(--electric-blue)';
+                }, 2000);
+            });
+        });
+    }
+
+    // ==========================================
     // SMOOTH SCROLL FOR ANCHOR LINKS
     // ==========================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
